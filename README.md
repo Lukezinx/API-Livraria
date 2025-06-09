@@ -1,6 +1,6 @@
 # 🚀 API Livraria
 
-API RESTful para gerenciamento completo de livros, autores e editoras, desenvolvida em Java 17 com Spring Boot. O projeto é containerizado com Docker 🐳 e utiliza PostgreSQL 🐘 como banco de dados relacional. Além disso, possui busca paginada e ordenação, tratamento de erros centralizado, validações e testes automatizados via Postman 📬.
+API RESTful para gerenciamento completo de livros, autores e editoras, desenvolvida em Java 17+ com Spring Boot. O projeto é containerizado com Docker 🐳 e utiliza PostgreSQL 🐘 como banco de dados relacional. Além disso, possui busca paginada e ordenação, tratamento de erros centralizado, validações e testes automatizados via Postman 📬.
 
 ---
 
@@ -21,7 +21,7 @@ API RESTful para gerenciamento completo de livros, autores e editoras, desenvolv
 
 ## 🛠️ Tecnologias Utilizadas
 
-- ☕ Java 17
+- ☕ Java 17+
 - 🌱 Spring Boot (MVC, Spring Data JPA)
 - 🐘 PostgreSQL
 - 🐳 Docker & Docker Compose
@@ -50,12 +50,6 @@ docker-compose up --build
 ```
 
 Este comando sobe a API e o banco PostgreSQL em containers isolados.
-
-4. **Testes**
-
-Importe a coleção Postman presente na pasta `postman` para testar os endpoints.
-
----
 
 ## 📁 Estrutura do Projeto
 
