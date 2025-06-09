@@ -1,0 +1,28 @@
+# Build
+/target/
+*.jar
+*.war
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# Logs
+logs/
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de ambiente e configs locais
+.env
+*.local
+application-local.properties
+application-dev.properties
+
+# Maven
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
