@@ -16,7 +16,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/autores") // --> pode ter a / ou nao, tanto faz.
+@RequestMapping("autores")
 //http://localhost:8080/autores
 
 @RequiredArgsConstructor
