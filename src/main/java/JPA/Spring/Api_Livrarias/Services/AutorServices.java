@@ -2,8 +2,10 @@ package JPA.Spring.Api_Livrarias.Services;
 
 import JPA.Spring.Api_Livrarias.Repository.AutorRepository;
 import JPA.Spring.Api_Livrarias.Repository.LivrosRepository;
+import JPA.Spring.Api_Livrarias.Security.SecurityService;
 import JPA.Spring.Api_Livrarias.exceptions.OperacaoNaoPermitidaException;
 import JPA.Spring.Api_Livrarias.molder.Autor;
+import JPA.Spring.Api_Livrarias.molder.Usuario;
 import JPA.Spring.Api_Livrarias.validator.AutorValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
@@ -21,10 +23,13 @@ public class AutorServices {
     private final AutorRepository repository;
     private final AutorValidator validator;
     private final LivrosRepository livrosRepository;
+    private final SecurityService securityService;
 
 
     public Autor salvar(Autor autor) {
         validator.validar(autor);
+        Usuario usuario = securityService.usuarioLogado();
+        autor.setUsuario(usuario);
         return repository.save(autor);
     }
 

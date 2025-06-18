@@ -1,9 +1,10 @@
 package JPA.Spring.Api_Livrarias.Services;
 
 import JPA.Spring.Api_Livrarias.Repository.LivrosRepository;
-import JPA.Spring.Api_Livrarias.Repository.Specs.LivroSpecs;
+import JPA.Spring.Api_Livrarias.Security.SecurityService;
 import JPA.Spring.Api_Livrarias.molder.GeneroLivro;
 import JPA.Spring.Api_Livrarias.molder.Livro;
+import JPA.Spring.Api_Livrarias.molder.Usuario;
 import JPA.Spring.Api_Livrarias.validator.LivroValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,9 +24,12 @@ public class LivroServices {
 
     private final LivrosRepository livrosRepository;
     private final LivroValidator validator;
+    private final SecurityService securityService;
 
     public Livro salvar(Livro livro) {
         validator.validarLivro(livro);
+        Usuario usuario = securityService.usuarioLogado();
+        livro.setUsuario(usuario);
         return livrosRepository.save(livro);
     }
 
@@ -53,6 +56,8 @@ public class LivroServices {
 //                        .and(LivroSpecs.generoEqual(genero));
 
 
+
+        //Where -> deprecated
         Specification<Livro> specs = Specification.where((root, query, cb) -> cb.conjunction());
 
         if( isbn != null) {

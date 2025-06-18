@@ -6,6 +6,7 @@ import JPA.Spring.Api_Livrarias.exceptions.CampoInvalidoException;
 import JPA.Spring.Api_Livrarias.exceptions.OperacaoNaoPermitidaException;
 import JPA.Spring.Api_Livrarias.exceptions.RegistroDuplicadoException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -49,6 +50,12 @@ public class GlobalExceptionHandler {
     public ErroResposta handleCampoInvalidoException(CampoInvalidoException e){
         return  new ErroResposta(HttpStatus.UNPROCESSABLE_ENTITY.value(),
                 "Erro validação", List.of(new ErroCampo(e.getCampos(), e.getMessage())));
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErroResposta handleAccessDeniedException(AccessDeniedException e){
+        return new ErroResposta(HttpStatus.FORBIDDEN.value(), "acesso negado", List.of());
     }
 
     @ExceptionHandler(RuntimeException.class)
