@@ -1,6 +1,9 @@
 spring:
   application:
     name: Api-Livrarias
+  output:
+    ansi:
+      enabled: ALWAYS
   datasource:
     url: jdbc:postgresql://localhost:5432/library
     username: postgres
@@ -20,3 +23,22 @@ spring:
           google:
             client-id: ${GOOGLE_CLIENT-ID}
             client-secret: ${GOOGLE_CLIENT_SECRET}
+
+logging:
+  pattern:
+    console: "%clr(%d{dd/MM/yyyy HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%t]){faint} %clr(%-40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"
+  file:
+    name: status.log
+  level:
+    root: warn
+    org:
+      springframework:
+        web: debug
+
+management:
+  server:
+    port: 9090
+  endpoints:
+    web:
+      exposure:
+        include: '*'
