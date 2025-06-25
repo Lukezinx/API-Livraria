@@ -2,17 +2,13 @@ package JPA.Spring.Api_Livrarias.Controller;
 
 import JPA.Spring.Api_Livrarias.Controller.Mappers.AutorMapper;
 import JPA.Spring.Api_Livrarias.Controller.dto.AutorDTO;
-import JPA.Spring.Api_Livrarias.Security.SecurityService;
 import JPA.Spring.Api_Livrarias.Services.AutorServices;
-import JPA.Spring.Api_Livrarias.Services.UsuarioServices;
 import JPA.Spring.Api_Livrarias.molder.Autor;
-import JPA.Spring.Api_Livrarias.molder.Usuario;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -23,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("autores")
+@Slf4j
 //http://localhost:8080/autores
 
 @RequiredArgsConstructor
@@ -34,6 +31,7 @@ public class AutorController implements GenericController {
     @PostMapping
     @PreAuthorize("hasRole('GERENTE')")
     public ResponseEntity<Object> salvar(@RequestBody @Valid AutorDTO dto) {
+        log.info("Cadastrando novo autor: {}", dto.nome());
 
         Autor autorEntidade = autorMapper.toEntity(dto);
         services.salvar(autorEntidade);
@@ -68,6 +66,7 @@ public class AutorController implements GenericController {
     @DeleteMapping("{id}")
     @PreAuthorize("hasRole('GERENTE')")
     public ResponseEntity<Object> deletar(@PathVariable("id") String id) {
+        log.info("deletendo um autor de ID: {}", id);
         var idAutor = UUID.fromString(id);
         Optional<Autor> autorOptional = services.obterPorId(idAutor);
 

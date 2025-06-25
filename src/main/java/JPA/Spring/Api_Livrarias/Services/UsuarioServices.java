@@ -26,7 +26,6 @@ public class UsuarioServices {
 
     public Usuario obeterPorEmail(String email){
         return  repository.findByEmail(email);
-
     }
 
 }
